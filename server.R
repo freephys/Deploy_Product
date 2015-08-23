@@ -20,9 +20,7 @@ shinyServer(function(input, output) {
 
   output$plotTS <- renderDygraph({
     data <- getSymbols(input$symb,from = input$dates[1],to = input$dates[2],src = input$symbSource,auto.assign = FALSE)
-    if(as.character(input$symbSource) == "FRED"){
-      dygraph(data,main = "Economic Data from Fed",group="fredData") %>% dyRangeSelector()
-    }else if(as.character(input$symbSource) == "oanda"){
+    if(as.character(input$symbSource) == "oanda"){
       dygraph(data,main = "FX Data from Oanda",group="oanda") %>% dyRangeSelector()
     }else if(as.character(input$symbSource) == "yahoo"){
       dygraph(Cl(data),main = "Stock Price From Yahoo",group="yahooData") %>% dyRangeSelector()
@@ -31,9 +29,8 @@ shinyServer(function(input, output) {
   
   output$plotReturn <- renderDygraph({
     data <- getSymbols(input$symb,from = input$dates[1],to = input$dates[2],src = input$symbSource,auto.assign = FALSE)
-    if(as.character(input$symbSource) == "FRED"){
-      dygraph(as.xts(Return.calculate(data),method = "log"),main = "Return",group="fredData") %>% dyRangeSelector()
-    }else if(as.character(input$symbSource) == "oanda"){
+
+    if(as.character(input$symbSource) == "oanda"){
       dygraph(as.xts(Return.calculate(data),method = "log"),main = "FX Data from Oanda",group="onada") %>% dyRangeSelector()
     }else if(as.character(input$symbSource) == "yahoo"){
       dygraph(as.xts(Return.calculate(Cl(data)),method = "log"),main = "Return",group="yahooData") %>% dyRangeSelector()

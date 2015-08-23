@@ -23,10 +23,9 @@ shinyUI(fluidPage(
       
       selectInput("symbSource",label=h4("Data source"),
                   choices=list("Yahoo Finance (OHLC data)" = "yahoo",
-                               "FRED (economic series)" = "FRED",
                                "Oanda (FX and Metals)"= "oanda"
                   ),selected="yahoo"),
-      bsTooltip(id="symbSource",title="Yahoo(AAPL etc),FRED(CPIAUCNS etc),Oanda(USD/EUR) ",placement = "right",trigger="hover"),
+      bsTooltip(id="symbSource",title="Yahoo(AAPL etc),Oanda(USD/EUR) ",placement = "right",trigger="hover"),
       
       helpText("Select date range of time series "),
       dateRangeInput("dates", 
